@@ -1,44 +1,49 @@
-(function(){
+(function () {
 
-  var fs = new FlixService()  
+  var fs = new FlixService()
 
 
   new Vue({
     el: '#vue-flix',
-    data: function(){
+    data: function () {
       return {
         category: 'actor',
         query: '',
         movies: [],
-        details: {}
+        details: {},
+        favorites: []
       }
     },
-    methods:{
-      search: function(){
-        if(this.category == 'title'){
+    methods: {
+      search: function () {
+        if (this.category == 'title') {
           fs.getFlix(this.category, this.query, this.setDetails)
           return
         }
         fs.getFlix(this.category, this.query, this.setMovies)
       },
-      setMovies: function(movies){
+      setMovies: function (movies) {
         this.movies = movies
       },
-      reset: function(){
+      reset: function () {
         this.query = ''
         this.category = '',
-        this.movies = []
+          this.movies = []
       },
-      setDetails: function(movie){
+      setDetails: function (movie) {
         this.details = movie
       },
-      clearDetails: function(){
+      clearDetails: function () {
         this.details = {}
+      },
+      addFavorite: function (movie) {
+        this.favorites.push(movie)
+      },
+      remove: function (movie) {
+        var i = this.favorites.indexOf(movie)
+        this.favorites.splice(i, 1)
       }
     }
   })
 
-  
-
-
-}())
+} ())

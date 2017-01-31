@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
-<body class="container">
+<body class="container-fluid">
 
   <div id="vue-flix">
     <div class="panel panel-default">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3>RESULTS</h3>
@@ -55,29 +55,45 @@
               <p>
                 <b>Cast:</b> {{details.show_cast}}
               </p>
+              <button @click="addFavorite(details)">Add to Favorites</button>
               <button @click="clearDetails">BACK</button>
             </div>
 
             <div v-if="movies.length > 0">
-              <ul class="list-group"  v-if="!details.show_title">
-                <li class="list-group-item" v-for="movie in movies" @click="setDetails(movie)">
-                  <img :src="movie.poster" height="150">
+              <ul class="list-group" v-if="!details.show_title">
+                <li class="list-group-item" v-for="movie in movies">
+                  <img @click="setDetails(movie)" :src="movie.poster" height="150">
                   <h4>{{movie.show_title}}</h4>
+                  <button @click="setDetails(movie)">MORE</button>
+                  <button @click="addFavorite(movie)">ADD</button>
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>MY FAVES</h3>
+            <p>You have {{favorites.length}} faves</p>
+          </div>
+          <div class="panel-body">
+            <div v-if="favorites.length > 0">
+              <ul class="list-group">
+                <li class="list-group-item" v-for="movie in favorites">
+                  <img :src="movie.poster" height="150">
+                  <h4>{{movie.show_title}}</h4>
+                  <button @click="setDetails(movie)">MORE</button>
+                  <button @click="remove(movie)">THIS IS TRASH</button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
   </div>
 
 
