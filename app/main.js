@@ -16,11 +16,35 @@
     },
     methods: {
       search: function () {
+        // if (this.category == 'title') {
+        //   fs.getFlix(this.category, this.query, (error, data) => {
+        //     if (error) {
+        //       // do something with the error
+        //       console.log(error);
+        //     }
+        //     else {
+        //       this.setDetails(data);
+        //     }
+        //   })
+        // }
+        // else {
+        //   fs.getFlix(this.category, this.query, (error, data) => {
+        //     this.setMovies(data);
+        //   });
+        // }
         if (this.category == 'title') {
-          fs.getFlix(this.category, this.query, this.setDetails)
+          fs.getFlix(this.category, this.query)
+            .then(this.setDetails)
+            .catch(error => {
+              console.log(error);
+            });
           return
         }
-        fs.getFlix(this.category, this.query, this.setMovies)
+        fs.getFlix(this.category, this.query)
+          .then(this.setMovies)
+          .catch(error => {
+            console.log(error);
+          });
       },
       setMovies: function (movies) {
         this.movies = movies
