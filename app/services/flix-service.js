@@ -1,6 +1,6 @@
 function FlixService() {
 
-  let base = 'http://netflixroulette.net/api/api.phpx?'
+  let base = '//netflixroulette.net/api/api.phpx?'
   
   this.$http = null;
 
